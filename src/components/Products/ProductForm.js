@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 
 class ProductForm extends Component {
     constructor(props) {

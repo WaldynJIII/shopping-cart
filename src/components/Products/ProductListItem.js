@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
 
 class ProductListItem extends Component {
 
     addProductToCart = () => {
         console.log(this.props.product);
-        // TODO: Dispatch here
+       this.props.dispatch({type: 'ADD_CART', payload: this.props.product,})
         
     }
 
@@ -15,6 +17,7 @@ class ProductListItem extends Component {
             </li>
         )
     }
-}
-
-export default ProductListItem;
+} const mapReduxStoreToProps = (reduxStore) => ({
+    reduxStore: reduxStore
+})
+export default connect(mapReduxStoreToProps)(ProductListItem);

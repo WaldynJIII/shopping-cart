@@ -17,7 +17,7 @@ const products = [
 
 // Array of products, this reducer is complete
 const productReducer = (state = products, action) => {
-    if (action.type === 'ADD_NEW_PRODUCT') {
+    if (action.type === 'ADD_ALSO') {
         return [...state, action.payload];
     }
     return state;
@@ -25,7 +25,9 @@ const productReducer = (state = products, action) => {
 
 // Items in the cart, this reducer is incomplete
 const checkoutReducer = (state = [], action) => {
-    // TODO: Products added to the cart
+    if(action.type==='ADD_CART'){
+        return[...state, action.payload]
+    }
     
     return state;
 };
