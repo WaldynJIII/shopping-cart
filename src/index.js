@@ -5,7 +5,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 // Redux
-import { createStore, combineReducers } from 'redux';
+import logger from 'redux-logger';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
 // Default set of products
@@ -28,7 +29,7 @@ const checkoutReducer = (state = [], action) => {
     if(action.type==='ADD_CART'){
         return[...state, action.payload]
     }
-    
+    console.log(state)
     return state;
 };
 
@@ -37,7 +38,7 @@ const storeInstance = createStore(
     combineReducers({
         productReducer,
         checkoutReducer
-    }),    
+    }), applyMiddleware(logger),
 );
 
 // Wrap our App in a Provider, this makes Redux available in

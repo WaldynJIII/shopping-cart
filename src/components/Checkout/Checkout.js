@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 class Checkout extends Component {
 
@@ -18,5 +19,7 @@ class Checkout extends Component {
         )
     }
 }
-
-export default Checkout;
+const mapReduxStoreToProps = (reduxStore) => ({
+    reduxStore: reduxStore
+})
+export default connect(mapReduxStoreToProps)(Checkout);
