@@ -1,21 +1,56 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+
+import { Redirect } from 'react-router';
 
 class Checkout extends Component {
-
+state={
+    price: 0,
+    redirect: false,
+}
+componentDidMount=()=>{
+    this.priceCheck()
+}
     handleCheckout = () => {
-        // TODO: Clear the cart and navigate to the product page
+        this.props.dispatch({type: "CLEAR_CART",})
+        this.setState({
+            redirect: true
+        })
 
+    }
+    priceCheck = () =>{
+        this.props.reduxStore.checkoutReducer.map(product=>(
+            this.setState({
+                ...this.state,
+                price: this.state.price +  Number(product.price),
+            })
+        ))
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect push to="/" />;
+        }
         return (
+           
             <div>
+      
                 <h2>Checkout</h2>
-                {/* TODO: Display items in the cart */}
 
-                <button onClick={this.handleCheckout}>Checkout</button>
+                <ul>
+                {this.props.reduxStore.checkoutReducer.map(product=>(
+               <li>{product.name} {product.price}</li>))}
+                </ul>
+            
+                <button onClick={this.handleCheckout}>
+                   
+                    Checkout</button>
+                    <footer>
+                        {this.state.price}
+                    </footer>
+                    
             </div>
+           
         )
     }
 }
